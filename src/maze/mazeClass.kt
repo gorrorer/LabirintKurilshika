@@ -4,16 +4,26 @@
 import java.io.File
 import kotlin.text.*
 import java.awt.Point
+import java.lang.IllegalArgumentException
 import java.util.Scanner
 
 
 class Maze(var mazeLocation: String) {
 
 
-    var character = Point(12, 12)
+
+    private val gameSettings = File(mazeLocation).readLines().last().split(" ").map { it.toInt() }
+    var character = if (gameSettings.size == 3) Point(gameSettings[0], gameSettings[1] )
+                        else throw IllegalArgumentException("Wrong game settings in file")
+    private val drawDistance = if ((gameSettings.size == 3) && (gameSettings[2] > 0)) gameSettings[2]
+                        else throw IllegalArgumentException("Wrong game settings in file")
     var input = ""
     private val mazeField = inputMaze()
-    private val drawDistance = 3
+
+
+    init { if ((character.x > mazeField.width) || (character.y > mazeField.height)
+        || (character.x > 0) || (character.y > 0) || (mazeField[character.y, character.x] != " "))
+        throw Exception("Wrong character coordinates") }
 
 
     private fun inputMaze(): Matrix<String> {
