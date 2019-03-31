@@ -11,25 +11,24 @@ import java.util.Scanner
 class Maze(var mazeLocation: String) {
 
 
+    init { if (Regex("""[0-9]+\s[0-9]+\s[0-9]+""").matches(File(mazeLocation).readLines().last()))
+    else throw Exception("Wrong game settings") }
+
 
     private val gameSettings = File(mazeLocation).readLines().last().split(" ").map { it.toInt() }
-    var character = if (gameSettings.size == 3) Point(gameSettings[0], gameSettings[1] )
-                        else throw IllegalArgumentException("Wrong game settings in file")
-    private val drawDistance = if ((gameSettings.size == 3) && (gameSettings[2] > 0)) gameSettings[2]
-                        else throw IllegalArgumentException("Wrong game settings in file")
+    private val drawDistance =  gameSettings[2]
     var input = ""
     private val mazeField = inputMaze()
-
-
-    init { if ((character.x > mazeField.width) || (character.y > mazeField.height)
-        || (character.x > 0) || (character.y > 0) || (mazeField[character.y, character.x] != " "))
-        throw Exception("Wrong character coordinates") }
+    var character = if ((gameSettings[0] <= mazeField.width) && (gameSettings[1] <= mazeField.height)
+        && (mazeField[gameSettings[1], gameSettings[0]] == " "))
+        Point(gameSettings[0], gameSettings[1])
+    else throw Exception("Wrong game settings")
 
 
     private fun inputMaze(): Matrix<String> {
         val outputStream = File(mazeLocation).readLines()
-        val stream = createMatrix(outputStream.size, outputStream.first().length, " ")
-        for (i in 0 until outputStream.size) {
+        val stream = createMatrix(outputStream.size - 1, outputStream.first().length, " ")
+        for (i in 0 until outputStream.size - 1) {
             for (k in 0 until outputStream[i].length) {
                 stream[i, k] = outputStream[i][k].toString()
             }
@@ -47,10 +46,10 @@ class Maze(var mazeLocation: String) {
             ((input.toLowerCase() == "w") && (character.y > 0)
                     && (mazeField[character.y - 1, character.x] == " ")) -> character.y--
 
-            ((input.toLowerCase() == "s") && (character.y < mazeField.height)
+            ((input.toLowerCase() == "s") && (character.y < mazeField.height - 1)
                     && (mazeField[character.y + 1, character.x] == " ")) -> character.y++
 
-            ((input.toLowerCase() == "d") && (character.x < mazeField.width)
+            ((input.toLowerCase() == "d") && (character.x < mazeField.width - 1)
                     && (mazeField[character.y, character.x + 1] == " ")) -> character.x++
         }
     }
