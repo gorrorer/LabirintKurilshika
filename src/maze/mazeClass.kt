@@ -70,14 +70,10 @@ class Maze(var mazeLocation: String) {
 
 
     fun drawMaze() {
+        for (i in 1..50)
+            println()
         mazeField[character.y, character.x] = "¤"
         visibleMaze()
         mazeField[character.y, character.x] = " "
-    }
-
-
-    fun redraw() {
-        for (i in 1..50)
-            println()
     }
 }

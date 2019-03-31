@@ -6,6 +6,5 @@ fun main() {
     while ((game.character.x != 0) && (game.character.y != 0)) {
         game.drawMaze()
         game.inputButton()
-        game.redraw()
     }
 }
