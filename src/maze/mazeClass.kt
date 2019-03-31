@@ -1,11 +1,15 @@
 @file:Suppress("UNUSED_PARAMETER", "unused")
 
 
+package maze
+
+
+import matrixInterface.*
 import java.io.File
 import kotlin.text.*
 import java.awt.Point
-import java.lang.IllegalArgumentException
 import java.util.Scanner
+
 
 
 class Maze(var mazeLocation: String) {
