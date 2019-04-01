@@ -34,7 +34,7 @@ fun <E> createMatrix(height: Int, width: Int, e: E): Matrix<E> {
 
 class MatrixImpl<E>(override val height: Int, override val width: Int, e: E) : Matrix<E> {
 
-    val array = MutableList(height) { MutableList(width) { e } }
+    private val array = MutableList(height) { MutableList(width) { e } }
 
     override fun get(row: Int, column: Int): E = array[row][column]
 
