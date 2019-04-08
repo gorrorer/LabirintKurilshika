@@ -78,7 +78,7 @@ class Maze(private val mazeLocation: String) {
 
 
     fun drawMaze() {
-        Toolkit.clearScreen(CharColor(CharColor.WHITE, CharColor.BLACK))
+        Toolkit.clearScreen(CharColor(CharColor.BLACK, CharColor.BLACK))
         mazeField[character.y, character.x] = characterModel
         visibleMaze()
         mazeField[character.y, character.x] = ' '
