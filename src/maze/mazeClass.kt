@@ -4,11 +4,12 @@
 package maze
 
 
+import jcurses.system.CharColor
 import matrixInterface.*
 import java.io.File
 import kotlin.text.*
 import java.awt.Point
-import java.util.Scanner
+import jcurses.system.Toolkit
 
 
 class Maze(private val mazeLocation: String) {
@@ -43,8 +44,9 @@ class Maze(private val mazeLocation: String) {
     }
 
 
-    fun inputButton() {
-        input = Scanner(System.`in`).next()     //here i want to realize input without pressing "Enter"
+    private fun inputButton() {
+        Toolkit.init()
+        input = Toolkit.readCharacter().character.toString()
         when {
             ((input.toLowerCase() == "a") && (character.x > 0)
                     && (mazeField[character.y, character.x - 1] == ' ')) -> character.x--
@@ -76,10 +78,10 @@ class Maze(private val mazeLocation: String) {
 
 
     fun drawMaze() {
-        for (i in 1..redrawRange)  //clear
-            println()
+        Toolkit.clearScreen(CharColor(CharColor.WHITE, CharColor.BLACK))
         mazeField[character.y, character.x] = characterModel
         visibleMaze()
         mazeField[character.y, character.x] = ' '
+        inputButton()
     }
 }
