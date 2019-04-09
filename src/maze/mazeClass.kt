@@ -64,16 +64,18 @@ class Maze(private val mazeLocation: String) {
 
 
     private fun visibleMaze() {
+        var visibleMaze = ""
         val fHeight = maxOf(character.y - drawDistance, 0)
         val sHeight = minOf(character.y + drawDistance, mazeField.height - 1)
         val fWidth = maxOf(character.x - drawDistance, 0)
         val sWidth = minOf(character.x + drawDistance, mazeField.width - 1)
         for (i in fHeight..sHeight) {
             for (k in fWidth..sWidth) {
-                print(mazeField[i, k])
+                visibleMaze += mazeField[i, k]
             }
-            println()
+            visibleMaze += "\n"
         }
+        print(visibleMaze)
     }
 
 
