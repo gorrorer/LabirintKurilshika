@@ -26,7 +26,7 @@ class Maze(private val mazeLocation: String) {
     private val drawDistance =  gameSettings[2]
     private var input = ""
     private val mazeField = inputMaze()
-    var character = if ((gameSettings[0] <= mazeField.width) && (gameSettings[1] <= mazeField.height)
+    private var character = if ((gameSettings[0] <= mazeField.width) && (gameSettings[1] <= mazeField.height)
         && (mazeField[gameSettings[1], gameSettings[0]] == ' '))
         Point(gameSettings[0], gameSettings[1])
     else throw Exception("Wrong game settings")

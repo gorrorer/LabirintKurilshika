@@ -11,12 +11,9 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Desktop/jcurses/lib/jcurses.jar!/" />
+          <root url="jar://$MODULE_DIR$/src/lib/jcurses.jar!/" />
         </CLASSES>
         <JAVADOC />
-        <NATIVE>
-          <root url="file://$USER_HOME$/Desktop/jcurses/lib" />
-        </NATIVE>
         <SOURCES />
       </library>
     </orderEntry>
