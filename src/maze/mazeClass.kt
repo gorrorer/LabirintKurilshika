@@ -20,7 +20,7 @@ class Maze(private val mazeLocation: String) {
 
 
 
-    private val characterModel = '¤'
+    var characterModel = '¤'
     private val redrawRange = 50
     private val gameSettings = File(mazeLocation).readLines().last().split(" ").map { it.toInt() }
     private val drawDistance =  gameSettings[2]
