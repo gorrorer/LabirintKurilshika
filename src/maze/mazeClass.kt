@@ -24,7 +24,7 @@ class Maze(private val mazeLocation: String) {
     private val redrawRange = 50
     private val gameSettings = File(mazeLocation).readLines().last().split(" ").map { it.toInt() }
     private val drawDistance =  gameSettings[2]
-    private var input = ""
+    var input = ""
     private val mazeField = inputMaze()
     var character = if ((gameSettings[0] <= mazeField.width) && (gameSettings[1] <= mazeField.height)
         && (mazeField[gameSettings[1], gameSettings[0]] == ' '))
@@ -63,7 +63,7 @@ class Maze(private val mazeLocation: String) {
     }
 
 
-    private fun visibleMaze() {
+    fun visibleMaze(): String {
         var visibleMaze = ""
         val fHeight = maxOf(character.y - drawDistance, 0)
         val sHeight = minOf(character.y + drawDistance, mazeField.height - 1)
@@ -75,14 +75,14 @@ class Maze(private val mazeLocation: String) {
             }
             visibleMaze += "\n"
         }
-        print(visibleMaze)
+        return visibleMaze
     }
 
 
     fun drawMaze() {
         Toolkit.clearScreen(CharColor(CharColor.BLACK, CharColor.BLACK))
         mazeField[character.y, character.x] = characterModel
-        visibleMaze()
+        println(visibleMaze())
         mazeField[character.y, character.x] = ' '
         inputButton()
     }
